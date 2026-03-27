@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<!-- ===== SEO META ===== -->
+<title>Taxi Dispatch Software | AI-Powered Fleet Management System – Yelowsoft</title>
+<meta name="description" content="Yelowsoft's AI-powered taxi dispatch software helps taxi businesses automate bookings, manage fleets in real time, and boost dispatch efficiency by 60%. Get a free demo today."/>
+<meta name="keywords" content="taxi dispatch software, white label taxi app, fleet management system, AI dispatch, automated taxi dispatch, taxi dispatcher app, ride hailing software"/>
+<!-- Open Graph -->
+<meta property="og:title" content="Taxi Dispatch Software | AI-Powered – Yelowsoft"/>
+<meta property="og:description" content="Automate your taxi dispatch, manage your fleet smarter, and scale without added overhead. 250+ businesses trust Yelowsoft."/>
+<meta property="og:type" content="website"/>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --yellow: #F5A700;
+    --dark: #1a2540;
+    --mid: #273c60;
+    --light: #f7f9fc;
+    --white: #fff;
+    --red: #ee3a24;
+    --text: #444;
+    --radius: 14px;
+    --shadow: 0 8px 32px rgba(39,60,96,.10);
+  }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; color: var(--text); background: var(--white); line-height: 1.65; }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white); border-bottom: 1px solid #eee;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw; height: 68px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  }
+  .nav-logo { font-size: 1.5rem; font-weight: 800; color: var(--mid); }
+  .nav-logo span { color: var(--yellow); }
+  .nav-links { display: flex; gap: 2rem; font-weight: 500; color: var(--mid); font-size: .97rem; }
+  .nav-cta {
+    background: var(--yellow); color: var(--dark);
+    padding: .55rem 1.3rem; border-radius: 8px;
+    font-weight: 700; font-size: .95rem;
+    transition: background .2s;
+  }
+  .nav-cta:hover { background: #e09500; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--mid) 60%, #2d5080 100%);
+    color: var(--white); padding: 80px 5vw 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: end;
+    overflow: hidden;
+  }
+  .hero-badge {
+    display: inline-block; background: rgba(245,167,0,.18);
+    border: 1px solid var(--yellow); color: var(--yellow);
+    font-size: .78rem; font-weight: 700; letter-spacing: .08em;
+    padding: .3rem .9rem; border-radius: 20px; margin-bottom: 1rem; text-transform: uppercase;
+  }
+  .hero h1 { font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800; line-height: 1.18; margin-bottom: 1.1rem; }
+  .hero h1 em { color: var(--yellow); font-style: normal; }
+  .hero p { font-size: 1.13rem; color: rgba(255,255,255,.82); max-width: 500px; margin-bottom: 2rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+  .btn-primary {
+    background: var(--yellow); color: var(--dark); font-weight: 700;
+    padding: .85rem 2rem; border-radius: 10px; font-size: 1rem;
+    display: inline-flex; align-items: center; gap: .5rem;
+    transition: transform .15s, box-shadow .15s;
+    box-shadow: 0 4px 20px rgba(245,167,0,.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(245,167,0,.5); }
+  .btn-outline {
+    border: 2px solid rgba(255,255,255,.35); color: var(--white);
+    padding: .83rem 2rem; border-radius: 10px; font-size: 1rem; font-weight: 600;
+    transition: border-color .2s, background .2s;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+
+  /* Dashboard mockup */
+  .hero-visual { position: relative; padding-top: 2rem; }
+  .dashboard {
+    background: #0f1c35; border-radius: 14px 14px 0 0;
+    padding: 1.4rem; box-shadow: 0 -4px 40px rgba(0,0,0,.4);
+    font-size: .82rem; color: #aac;
+    animation: slideUp .7s ease both;
+  }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+  .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+  .dash-title { color: var(--white); font-weight: 700; font-size: .95rem; }
+  .badge-live { background: #22c55e; color: #fff; font-size: .68rem; padding: .2rem .6rem; border-radius: 10px; font-weight: 700; }
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: .7rem; margin-bottom: 1rem; }
+  .stat { background: rgba(255,255,255,.06); border-radius: 10px; padding: .7rem .8rem; }
+  .stat-val { color: var(--yellow); font-size: 1.4rem; font-weight: 800; display: block; }
+  .stat-label { color: rgba(255,255,255,.5); font-size: .7rem; margin-top: .1rem; }
+  .map-mock {
+    background: linear-gradient(135deg, #0d2240 0%, #1a3a5c 100%);
+    border-radius: 10px; height: 130px; position: relative; overflow: hidden;
+    margin-bottom: .8rem;
+  }
+  .map-grid { position: absolute; inset: 0; opacity: .15;
+    background-image: linear-gradient(#4af 1px, transparent 1px), linear-gradient(90deg, #4af 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .car { position: absolute; width: 10px; height: 10px; border-radius: 50%; }
+  .car-1 { background: var(--yellow); top: 30%; left: 20%; box-shadow: 0 0 8px var(--yellow); animation: pulse 2s infinite; }
+  .car-2 { background: #22c55e; top: 55%; left: 55%; box-shadow: 0 0 8px #22c55e; animation: pulse 2s .5s infinite; }
+  .car-3 { background: #60a5fa; top: 20%; left: 70%; box-shadow: 0 0 8px #60a5fa; animation: pulse 2s 1s infinite; }
+  .car-4 { background: var(--red); top: 70%; left: 35%; box-shadow: 0 0 8px var(--red); animation: pulse 2s 1.5s infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1); opacity:1; } 50% { transform: scale(1.6); opacity:.7; } }
+  .map-label { position: absolute; bottom: .5rem; left: .7rem; color: rgba(255,255,255,.6); font-size: .68rem; }
+  .alerts { display: flex; flex-direction: column; gap: .4rem; }
+  .alert-row {
+    background: rgba(255,255,255,.04); border-left: 3px solid var(--yellow);
+    border-radius: 0 8px 8px 0; padding: .4rem .7rem;
+    display: flex; align-items: center; gap: .5rem;
+    color: rgba(255,255,255,.7); font-size: .72rem;
+  }
+  .alert-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow); flex-shrink: 0; }
+
+  /* ===== TRUST BAR ===== */
+  .trust-bar {
+    background: var(--light); padding: 1.4rem 5vw;
+    display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+  }
+  .trust-label { font-size: .8rem; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+  .trust-logos { display: flex; gap: 1.8rem; flex-wrap: wrap; align-items: center; }
+  .trust-logo { font-weight: 800; font-size: .95rem; color: #bbb; }
+
+  /* ===== STATS STRIP ===== */
+  .stats-strip {
+    background: var(--mid); color: var(--white);
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    padding: 2.5rem 5vw; gap: 1rem; text-align: center;
+  }
+  .strip-stat-val { font-size: 2.4rem; font-weight: 900; color: var(--yellow); }
+  .strip-stat-label { font-size: .9rem; color: rgba(255,255,255,.7); margin-top: .3rem; }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 80px 5vw; }
+  .section-tag { color: var(--yellow); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .5rem; }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); color: var(--dark); font-weight: 800; line-height: 1.25; margin-bottom: .8rem; }
+  .section-sub { font-size: 1.05rem; color: #666; max-width: 620px; margin-bottom: 2.5rem; }
+
+  /* ===== PAIN / SOLUTION ===== */
+  .pain-solution {
+    background: linear-gradient(135deg, #fef3e2 0%, #fff8ee 100%);
+    border-radius: var(--radius); padding: 3rem; margin-bottom: 2rem;
+  }
+  .pain-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .pain-list, .fix-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+  .pain-list li::before { content: "✕ "; color: var(--red); font-weight: 800; }
+  .fix-list li::before { content: "✓ "; color: #22c55e; font-weight: 800; }
+  .pain-list li, .fix-list li { font-size: .97rem; color: var(--dark); font-weight: 500; }
+  .col-head { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: 1rem; }
+
+  /* ===== FEATURE GRID ===== */
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .feature-card {
+    border: 1px solid #eee; border-radius: var(--radius); padding: 1.8rem;
+    transition: box-shadow .2s, transform .2s; background: var(--white);
+  }
+  .feature-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+  .feat-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .feature-card h3 { font-size: 1.05rem; color: var(--dark); font-weight: 800; margin-bottom: .5rem; }
+  .feature-card p { font-size: .91rem; color: #666; }
+  .feat-badge { display: inline-block; background: #fff3cd; color: #a16200; font-size: .68rem; font-weight: 700; padding: .15rem .55rem; border-radius: 10px; margin-bottom: .5rem; }
+
+  /* ===== HOW IT WORKS ===== */
+  .how-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .steps { display: flex; flex-direction: column; gap: 1.3rem; }
+  .step { display: flex; gap: 1.1rem; align-items: flex-start; }
+  .step-num { background: var(--yellow); color: var(--dark); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: .9rem; flex-shrink: 0; }
+  .step-content h3 { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: .3rem; }
+  .step-content p { font-size: .9rem; color: #666; }
+
+  /* ===== AI SECTION ===== */
+  .ai-section { background: linear-gradient(135deg, var(--dark) 0%, #1d3461 100%); color: var(--white); }
+  .ai-section h2 { color: var(--white); }
+  .ai-section .section-sub { color: rgba(255,255,255,.7); }
+  .ai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .ai-card {
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+    border-radius: var(--radius); padding: 1.7rem;
+    transition: background .2s;
+  }
+  .ai-card:hover { background: rgba(255,255,255,.12); }
+  .ai-card h3 { font-size: 1rem; font-weight: 800; color: var(--yellow); margin-bottom: .5rem; }
+  .ai-card p { font-size: .9rem; color: rgba(255,255,255,.7); }
+  .ai-icon { font-size: 1.8rem; margin-bottom: .8rem; }
+
+  /* ===== BENEFITS ===== */
+  .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .benefit-card { display: flex; gap: 1rem; align-items: flex-start; padding: 1.5rem; border-radius: var(--radius); background: var(--light); }
+  .benefit-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .benefit-card h3 { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: .3rem; }
+  .benefit-card p { font-size: .9rem; color: #666; }
+
+  /* ===== TESTIMONIAL ===== */
+  .testimonial-section { background: var(--light); }
+  .testimonial-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 2.5rem; max-width: 760px; margin: 0 auto;
+    box-shadow: var(--shadow); position: relative;
+  }
+  .quote-mark { font-size: 5rem; line-height: 1; color: var(--yellow); font-family: Georgia, serif; position: absolute; top: 1rem; left: 2rem; opacity: .3; }
+  .testimonial-text { font-size: 1.1rem; color: var(--dark); font-style: italic; line-height: 1.7; margin-bottom: 1.2rem; padding-top: 1.5rem; }
+  .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+  .author-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--yellow); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--dark); font-size: 1.2rem; }
+  .author-name { font-weight: 800; color: var(--dark); }
+  .author-co { font-size: .85rem; color: #888; }
+  .stars { color: var(--yellow); font-size: 1.1rem; margin-bottom: .3rem; }
+
+  /* ===== FAQ ===== */
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .faq-item { border: 1px solid #eee; border-radius: var(--radius); overflow: hidden; }
+  .faq-q {
+    background: var(--white); padding: 1.2rem 1.5rem;
+    font-weight: 700; color: var(--dark); font-size: .97rem;
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    user-select: none;
+  }
+  .faq-q:hover { background: var(--light); }
+  .faq-a {
+    padding: 0 1.5rem; max-height: 0; overflow: hidden;
+    transition: max-height .35s ease, padding .35s ease;
+    font-size: .91rem; color: #666; background: var(--light);
+  }
+  .faq-a.open { max-height: 200px; padding: 1rem 1.5rem; }
+  .faq-chevron { transition: transform .3s; font-size: .75rem; color: #aaa; }
+  .faq-chevron.open { transform: rotate(180deg); }
+
+  /* ===== CTA BANNER ===== */
+  .cta-banner {
+    background: linear-gradient(135deg, var(--yellow) 0%, #f0b800 100%);
+    color: var(--dark); text-align: center; border-radius: var(--radius);
+    padding: 4rem 2rem; margin: 0 5vw 4rem;
+    box-shadow: 0 8px 40px rgba(245,167,0,.3);
+  }
+  .cta-banner h2 { color: var(--dark); font-size: clamp(1.6rem,3vw,2.2rem); margin-bottom: .8rem; }
+  .cta-banner p { font-size: 1.05rem; color: rgba(0,0,0,.65); max-width: 520px; margin: 0 auto 2rem; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-dark { background: var(--dark); color: var(--white); font-weight: 700; padding: .9rem 2.2rem; border-radius: 10px; font-size: 1rem; transition: background .2s; }
+  .btn-dark:hover { background: #0f1c35; }
+  .btn-ghost { border: 2px solid var(--dark); color: var(--dark); font-weight: 700; padding: .88rem 2.2rem; border-radius: 10px; font-size: 1rem; }
+  .cta-note { font-size: .82rem; color: rgba(0,0,0,.5); margin-top: 1rem; }
+
+  /* ===== FOOTER ===== */
+  footer { background: var(--dark); color: rgba(255,255,255,.55); text-align: center; padding: 2rem 5vw; font-size: .87rem; }
+  footer a { color: var(--yellow); }
+
+  /* ===== INTERNAL LINKS ===== */
+  .internal-links { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2rem; }
+  .int-link {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: var(--light); border: 1px solid #ddd;
+    color: var(--mid); font-weight: 600; font-size: .85rem;
+    padding: .45rem 1rem; border-radius: 20px; transition: background .2s;
+  }
+  .int-link:hover { background: #e8edf5; }
+
+  /* ===== VIDEO PLACEHOLDER ===== */
+  .video-wrap {
+    border-radius: var(--radius); overflow: hidden;
+    background: linear-gradient(135deg, #0f1c35 0%, #1a3a5c 100%);
+    aspect-ratio: 16/9; position: relative; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow);
+  }
+  .play-btn {
+    width: 70px; height: 70px; background: var(--yellow); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; color: var(--dark);
+    box-shadow: 0 4px 24px rgba(245,167,0,.5);
+    transition: transform .2s;
+  }
+  .video-wrap:hover .play-btn { transform: scale(1.1); }
+  .video-label { position: absolute; bottom: 1.2rem; color: rgba(255,255,255,.6); font-size: .85rem; }
+  .video-grid-lines {
+    position: absolute; inset: 0; opacity: .06;
+    background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .video-cars { position: absolute; inset: 0; }
+  .vc { position: absolute; width: 12px; height: 12px; border-radius: 50%; }
+  .vc1 { background: var(--yellow); top: 25%; left: 15%; box-shadow: 0 0 12px var(--yellow); animation: float1 6s ease-in-out infinite; }
+  .vc2 { background: #22c55e; top: 60%; left: 60%; box-shadow: 0 0 12px #22c55e; animation: float2 7s ease-in-out infinite; }
+  .vc3 { background: #60a5fa; top: 40%; left: 80%; box-shadow: 0 0 12px #60a5fa; animation: float1 5s ease-in-out infinite 1s; }
+  @keyframes float1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(20px,-15px); } }
+  @keyframes float2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-15px,20px); } }
+
+  /* ===== GIF ANIMATION STRIP ===== */
+  .anim-strip {
+    background: var(--dark); padding: 1rem 5vw;
+    display: flex; align-items: center; gap: 2rem; overflow: hidden; white-space: nowrap;
+  }
+  .anim-item { color: rgba(255,255,255,.5); font-size: .85rem; display: flex; align-items: center; gap: .5rem; flex-shrink: 0; }
+  .anim-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; animation: blink 2s infinite; }
+  .green-dot { background: #22c55e; }
+  .yellow-dot { background: var(--yellow); animation-delay: .5s; }
+  .blue-dot { background: #60a5fa; animation-delay: 1s; }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding-bottom: 0; }
+    .hero-visual { display: none; }
+    .stats-strip, .feature-grid, .ai-grid { grid-template-columns: 1fr 1fr; }
+    .pain-cols, .how-grid, .benefits-grid, .faq-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .stats-strip, .feature-grid, .ai-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 2fr 2fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="nav-logo">Yelow<span>soft</span></div>
+  <div class="nav-links">
+    <a href="#">Products</a>
+    <a href="#">Solutions</a>
+    <a href="#">Pricing</a>
+    <a href="#">Resources</a>
+  </div>
+  <a href="#demo" class="nav-cta">📅 Book Free Demo</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🤖 AI-Powered Taxi Dispatch Software</div>
+    <h1>#1 <em>Taxi Dispatch Software</em> to Scale Your Fleet Without the Chaos</h1>
+    <p>Automate bookings, assign drivers instantly with AI, and manage your entire fleet from one powerful dashboard. Trusted by 250+ taxi businesses worldwide.</p>
+    <div class="hero-btns">
+      <a href="#demo" class="btn-primary">📅 Book Free Demo →</a>
+      <a href="#how" class="btn-outline">▶ See How It Works</a>
+    </div>
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+      <span style="color:rgba(255,255,255,.6);font-size:.85rem;">✅ No credit card required</span>
+      <span style="color:rgba(255,255,255,.6);font-size:.85rem;">✅ Live demo in 30 minutes</span>
+      <span style="color:rgba(255,255,255,.6);font-size:.85rem;">✅ White label ready</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="dashboard">
+      <div class="dash-header">
+        <span class="dash-title">🚖 Yelowsoft Dispatch Dashboard</span>
+        <span class="badge-live">● LIVE</span>
+      </div>
+      <div class="stats-row">
+        <div class="stat"><span class="stat-val">142</span><div class="stat-label">Active Drivers</div></div>
+        <div class="stat"><span class="stat-val">1,038</span><div class="stat-label">Trips Today</div></div>
+        <div class="stat"><span class="stat-val">23</span><div class="stat-label">Pending</div></div>
+        <div class="stat"><span class="stat-val">$4,720</span><div class="stat-label">Revenue</div></div>
+      </div>
+      <div class="map-mock">
+        <div class="map-grid"></div>
+        <div class="car car-1"></div>
+        <div class="car car-2"></div>
+        <div class="car car-3"></div>
+        <div class="car car-4"></div>
+        <div class="map-label">🗺 Live GPS — 142 drivers on route</div>
+      </div>
+      <div class="alerts">
+        <div class="alert-row"><div class="alert-dot"></div>Auto-dispatch ON — 3 rides matched in last 60s</div>
+        <div class="alert-row"><div class="alert-dot" style="background:#22c55e"></div>Peak hours detected — AI surge pricing active</div>
+        <div class="alert-row"><div class="alert-dot" style="background:#60a5fa"></div>ETA accuracy: 97% — AI routing optimized</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ANIMATED STATUS STRIP ===== -->
+<div class="anim-strip">
+  <div class="anim-item"><div class="anim-dot green-dot"></div>Auto-dispatch active</div>
+  <div class="anim-item"><div class="anim-dot yellow-dot"></div>AI surge pricing enabled</div>
+  <div class="anim-item"><div class="anim-dot blue-dot"></div>Fleet utilization: 87%</div>
+  <div class="anim-item"><div class="anim-dot green-dot"></div>3 rides matched in last 60s</div>
+  <div class="anim-item"><div class="anim-dot yellow-dot"></div>ETA accuracy: 97%</div>
+  <div class="anim-item"><div class="anim-dot blue-dot"></div>250+ businesses live globally</div>
+</div>
+
+<!-- ===== TRUST BAR ===== -->
+<div class="trust-bar">
+  <span class="trust-label">Trusted by 250+ businesses:</span>
+  <div class="trust-logos">
+    <span class="trust-logo">Click To Go</span>
+    <span class="trust-logo">TaxiNow</span>
+    <span class="trust-logo">RideFleet Pro</span>
+    <span class="trust-logo">CabLink</span>
+    <span class="trust-logo" style="color:#bbb;">+246 more →</span>
+  </div>
+</div>
+
+<!-- ===== STATS ===== -->
+<div class="stats-strip">
+  <div><div class="strip-stat-val">60%</div><div class="strip-stat-label">Boost in dispatch efficiency</div></div>
+  <div><div class="strip-stat-val">3x</div><div class="strip-stat-label">Faster ride assignment with AI</div></div>
+  <div><div class="strip-stat-val">40%</div><div class="strip-stat-label">Reduction in missed bookings</div></div>
+  <div><div class="strip-stat-val">250+</div><div class="strip-stat-label">Taxi businesses served globally</div></div>
+</div>
+
+<!-- ===== PAIN POINTS ===== -->
+<section>
+  <div class="section-tag">Why Taxi Businesses Switch to Yelowsoft</div>
+  <h2>Still Dispatching Manually? Here's What It's Costing You</h2>
+  <p class="section-sub">Every minute your fleet runs on pen and paper or spreadsheets is revenue lost. Yelowsoft's intelligent taxi dispatch software fixes this — automatically.</p>
+  <div class="pain-solution">
+    <div class="pain-cols">
+      <div>
+        <div class="col-head">❌ Without Yelowsoft</div>
+        <ul class="pain-list">
+          <li>Dispatchers overwhelmed with phone calls</li>
+          <li>Drivers sitting idle in wrong zones</li>
+          <li>Missed bookings during peak hours</li>
+          <li>No real-time visibility on fleet location</li>
+          <li>Manual fare calculation errors & disputes</li>
+          <li>Zero data on performance or revenue trends</li>
+          <li>Customers calling to ask "where is my cab?"</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-head">✅ With Yelowsoft</div>
+        <ul class="fix-list">
+          <li>AI auto-assigns the nearest driver instantly</li>
+          <li>Smart zone positioning reduces idle time</li>
+          <li>Zero missed rides — automated queue management</li>
+          <li>Live GPS map of every driver, every second</li>
+          <li>Transparent, rule-based fare calculation</li>
+          <li>Full analytics: revenue, performance, peak hours</li>
+          <li>Passengers get real-time ETAs on their phone</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section style="background:var(--light);padding-top:80px;padding-bottom:80px;">
+  <div class="section-tag">Taxi Dispatch Software Features</div>
+  <h2>Every Feature Your Fleet Needs to Dispatch Smarter</h2>
+  <p class="section-sub">Our AI-powered taxi dispatch platform combines automated trip management, real-time visibility, and white label taxi app capabilities — all in one place.</p>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feat-icon">📅</div>
+      <div class="feat-badge">Scheduling</div>
+      <h3>Dispatch Scheduling Tool</h3>
+      <p>Let customers pre-book rides days in advance. Your scheduling tool handles the queue automatically — no manual intervention needed.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">⚡</div>
+      <div class="feat-badge">Real-Time</div>
+      <h3>Real-Time Booking Management</h3>
+      <p>Monitor incoming bookings and driver positions live. Make instant allocation decisions from your taxi dispatcher app dashboard.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🗺</div>
+      <div class="feat-badge">GPS Tracking</div>
+      <h3>Live GPS Fleet Tracking</h3>
+      <p>Track every driver on a live map with accurate ETAs. Give customers real-time visibility and slash inbound support calls.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🤖</div>
+      <div class="feat-badge">🔥 AI-Powered</div>
+      <h3>AI Automated Dispatching</h3>
+      <p>Our AI dispatch engine matches riders with the nearest available driver in seconds — reducing wait times and maximizing fleet utilization.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">💰</div>
+      <div class="feat-badge">Dynamic Pricing</div>
+      <h3>AI Surge & Fare Calculation</h3>
+      <p>Auto-calculate fares by distance, wait time, and demand-based surge pricing. Set your own rules for every vehicle class and zone.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">📊</div>
+      <div class="feat-badge">Analytics</div>
+      <h3>Fleet Analytics & Reporting</h3>
+      <p>View revenue, peak hours, driver performance, and popular routes. Make data-driven decisions from one intelligent dashboard.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🏷</div>
+      <div class="feat-badge">White Label</div>
+      <h3>White Label Taxi App</h3>
+      <p>Launch your own branded passenger and driver app. Full white label taxi app solution — your logo, your colors, your brand.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🚐</div>
+      <div class="feat-badge">Fleet Management</div>
+      <h3>Fleet Management System</h3>
+      <p>Manage vehicle profiles, maintenance schedules, driver assignments, and utilization metrics from one centralized fleet management system.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🔐</div>
+      <div class="feat-badge">Security</div>
+      <h3>Role-Based Access Control</h3>
+      <p>Assign different access levels to dispatchers, managers, and admins. Maintain security and accountability across your operation.</p>
+    </div>
+  </div>
+  <!-- Internal links -->
+  <div class="internal-links">
+    <a href="https://www.yelowsoft.com/taxi-dispatch-software/" class="int-link">→ Taxi Dispatch Software</a>
+    <a href="https://www.yelowsoft.com/airport-taxi-transfer-software/" class="int-link">→ Airport Transfer Software</a>
+    <a href="https://www.yelowsoft.com/limo-dispatch-booking-software/" class="int-link">→ Limo Dispatch Software</a>
+    <a href="https://www.yelowsoft.com/corporate-taxi-booking-solution/" class="int-link">→ Corporate Transport</a>
+    <a href="https://www.yelowsoft.com/ride-hailing-software/" class="int-link">→ Ride Hailing Software</a>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section id="how">
+  <div class="section-tag">How It Works</div>
+  <h2>From Login to Live Dispatch in Under 5 Minutes</h2>
+  <p class="section-sub">Yelowsoft's taxi dispatch app dashboard is designed for taxi business owners — not engineers. Get your fleet running in minutes.</p>
+  <div class="how-grid">
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Log In to Your Secure Dispatcher Panel</h3>
+          <p>Access your taxi dispatcher app from any device — desktop or mobile. Protected with role-based access control.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Review Your Dispatch Dashboard Overview</h3>
+          <p>Instantly see active drivers, pending bookings, completed rides, and daily revenue on your taxi dispatch app dashboard.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>AI Allocates Rides Automatically</h3>
+          <p>View driver locations in real-time. Let our AI automated dispatch engine handle the matching — no phone calls needed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Monitor Bookings & Resolve Issues Fast</h3>
+          <p>Handle all pending and confirmed bookings from one screen. Respond to customers without leaving the panel.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h3>Analyze, Optimize, and Grow</h3>
+          <p>Use built-in reports on revenue, peak hours, and driver performance to continuously improve your taxi dispatch operations.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Video placeholder -->
+    <div class="video-wrap">
+      <div class="video-grid-lines"></div>
+      <div class="video-cars">
+        <div class="vc vc1"></div>
+        <div class="vc vc2"></div>
+        <div class="vc vc3"></div>
+      </div>
+      <div>
+        <div class="play-btn">▶</div>
+        <div style="color:rgba(255,255,255,.7);font-size:.85rem;text-align:center;margin-top:.8rem;">Watch 2-min Overview</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AI SECTION ===== -->
+<section class="ai-section">
+  <div class="section-tag">AI & Machine Learning</div>
+  <h2>Smarter Dispatch with Built-In Artificial Intelligence</h2>
+  <p class="section-sub">Yelowsoft's AI dispatch engine learns your fleet patterns and continuously optimizes assignments, routing, and pricing — 24/7, without a dispatcher making a single call.</p>
+  <div class="ai-grid">
+    <div class="ai-card">
+      <div class="ai-icon">🧠</div>
+      <h3>AI Driver Matching</h3>
+      <p>Machine learning assigns the optimal driver based on proximity, availability, rating, and vehicle type — not just distance.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">📈</div>
+      <h3>Predictive Demand Forecasting</h3>
+      <p>AI predicts high-demand zones before peak hours hit, positioning your fleet ahead of demand to capture more rides.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">💡</div>
+      <h3>Dynamic Surge Pricing</h3>
+      <p>Automatically adjust fares based on real-time supply and demand signals — maximize revenue without manual intervention.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🗺</div>
+      <h3>Intelligent Route Optimization</h3>
+      <p>AI-powered routing reduces trip durations and fuel costs, improving driver earnings and passenger satisfaction simultaneously.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🔍</div>
+      <h3>Anomaly & Fraud Detection</h3>
+      <p>Automatic detection of suspicious patterns — fare manipulation, ghost rides, or unusual driver behavior — keeps your fleet clean.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">📊</div>
+      <h3>AI Performance Insights</h3>
+      <p>Get actionable AI-generated recommendations on driver schedules, fleet expansion, and operational improvements weekly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BENEFITS ===== -->
+<section>
+  <div class="section-tag">Benefits</div>
+  <h2>Boost Dispatch Efficiency by Up to 60%</h2>
+  <p class="section-sub">Yelowsoft is the best taxi dispatch solution for businesses that want to scale without adding overhead or stress.</p>
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">⚡</div>
+      <div>
+        <h3>Efficient Automated Dispatching</h3>
+        <p>Automate driver-to-ride matching across your entire fleet. Spend less time on the phone and more time growing your business.</p>
+      </div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🎯</div>
+      <div>
+        <h3>Smarter Resource Allocation</h3>
+        <p>Identify high-demand zones in real time and position your fleet ahead of demand. Maximize rides per driver per day.</p>
+      </div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🕐</div>
+      <div>
+        <h3>Reduced Dispatcher Workload</h3>
+        <p>Automating manual tasks frees your dispatch team to handle exceptions, VIP customers, and edge cases — not routine bookings.</p>
+      </div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">⭐</div>
+      <div>
+        <h3>Improved Customer Satisfaction</h3>
+        <p>Faster response times, accurate ETAs, and transparent fares translate directly into better ratings and repeat riders.</p>
+      </div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🏷</div>
+      <div>
+        <h3>Your Brand, Your App</h3>
+        <p>White label taxi app solution means your passengers see your brand — not ours. Build loyalty and recognition in your market.</p>
+      </div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">📱</div>
+      <div>
+        <h3>Manage from Anywhere</h3>
+        <p>Access your full fleet management system from desktop, tablet, or mobile. Dispatch on the go, 24/7.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIAL ===== -->
+<section class="testimonial-section">
+  <div class="section-tag">Testimonials</div>
+  <h2 style="text-align:center;margin-bottom:2rem;">What Taxi Business Owners Say</h2>
+  <div class="testimonial-card">
+    <div class="quote-mark">"</div>
+    <div class="stars">★★★★★</div>
+    <p class="testimonial-text">Yelowsoft's taxi dispatcher app completely transformed how we handle bookings. We went from managing everything manually to having 90% of dispatches automated within the first week. The AI matching is incredible — our drivers earn more and customers wait less.</p>
+    <div class="testimonial-author">
+      <div class="author-avatar">AR</div>
+      <div>
+        <div class="author-name">Arturo Reveles</div>
+        <div class="author-co">Founder, Click To Go — Mexico</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:1.5rem;">
+    <a href="https://www.yelowsoft.com/testimonials/" style="color:var(--mid);font-weight:700;font-size:.95rem;">View more testimonials →</a>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section>
+  <div class="section-tag">FAQ</div>
+  <h2>Frequently Asked Questions</h2>
+  <p class="section-sub">Everything taxi business owners ask before switching to Yelowsoft's taxi dispatch software.</p>
+  <div class="faq-grid" id="faqGrid">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What is taxi dispatch software? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Taxi dispatch software is a platform that automates the process of matching passenger ride requests with available drivers. It replaces manual phone-based dispatching with real-time, AI-powered assignment — reducing wait times, missed bookings, and dispatcher workload.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What is a white label taxi app? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">A white label taxi app is a ready-built passenger and driver app that you can brand with your own logo, colors, and name. Yelowsoft provides a fully white label taxi app solution — so your customers see your brand, not ours.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How does AI improve taxi dispatching? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">AI dispatch uses machine learning to match drivers based on proximity, availability, and historical patterns. It also predicts demand zones, optimizes routes, and enables dynamic surge pricing — all without any manual input from your team.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Can I manage my fleet remotely? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Yes. Yelowsoft's fleet management system is fully cloud-based and works on desktop, tablet, and mobile. You can monitor drivers, manage bookings, and view analytics from anywhere in the world.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">How long does it take to get started? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Most taxi businesses are live within a few days. Yelowsoft provides full onboarding support, data migration assistance, and a dedicated account manager to get your fleet running as fast as possible.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Does Yelowsoft support airport transfer and limo dispatch? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Yes. Yelowsoft supports multiple business types including airport transfer, limo dispatch, corporate transport, and ride hailing — all from the same dispatch platform with vehicle-class-specific fare and routing rules.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">Is there a free trial or demo available? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">Yes. You can book a free 30-minute live demo of the full taxi dispatcher app dashboard — no credit card required. Our team will walk you through every feature and answer questions specific to your fleet size and business model.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">What is a fleet management system? <span class="faq-chevron">▼</span></div>
+      <div class="faq-a">A fleet management system is software that helps taxi businesses track, manage, and optimize their vehicles and drivers. Features include real-time GPS tracking, driver performance monitoring, vehicle maintenance scheduling, and utilization analytics.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA BANNER ===== -->
+<div class="cta-banner" id="demo">
+  <div style="font-size:2.5rem;margin-bottom:1rem;">🚖</div>
+  <h2>Ready to Automate Your Taxi Dispatch Operations?</h2>
+  <p>Join 250+ taxi businesses using Yelowsoft's AI-powered taxi dispatch software. See the full fleet management system live — in under 30 minutes. No credit card required.</p>
+  <div class="cta-btns">
+    <a href="https://www.yelowsoft.com/demo" class="btn-dark">📅 Book Your Free Demo →</a>
+    <a href="https://service.yelowsoft.co/signup?pricing=3" class="btn-ghost">Start Free Trial</a>
+  </div>
+  <div class="cta-note">⚡ Average setup time: 48 hours • 250+ businesses live globally • White label ready</div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>© 2026 Yelowsoft Inc. | <a href="https://www.yelowsoft.com/terms-of-use/">Terms</a> | <a href="https://www.yelowsoft.com/privacy-policy/">Privacy</a> | <a href="https://www.yelowsoft.com/contact/">Contact Sales</a></p>
+  <p style="margin-top:.5rem;font-size:.78rem;">Taxi Dispatch Software · White Label Taxi App · Fleet Management System · AI Dispatch · Ride Hailing Software</p>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  const answer = el.nextElementSibling;
+  const chevron = el.querySelector('.faq-chevron');
+  const isOpen = answer.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-chevron').forEach(c => c.classList.remove('open'));
+  if (!isOpen) { answer.classList.add('open'); chevron.classList.add('open'); }
+}
+</script>
+</body>
+</html>
