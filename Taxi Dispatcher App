@@ -1,22 +1,122 @@
+export default {
+  async fetch(request) {
+
+    const html = `<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Taxi Dispatch Software | Yellowsoft</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Taxi Dispatch Software | Yellowsoft</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com/" />
-  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+body {
+  font-family: 'DM Sans', sans-serif;
+  margin: 0;
+  background: #f5f7fb;
+}
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      line-height: 1.6;
-    }
+nav {
+  background: #1a2540;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
 
-    h1 {
-      color: #F5A700;
-    }
-  </style>
+.hero {
+  background: #273c60;
+  color: #fff;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  color: #F5A700;
+  font-size: 42px;
+}
+
+.section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.box {
+  background: #fff;
+  padding: 20px;
+  width: 250px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.footer {
+  background: #1a2540;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+</style>
 </head>
+
+<body>
+
+<nav>Taxi Dispatch Software</nav>
+
+<section class="hero">
+  <h1>Smart Taxi Dispatch System</h1>
+  <p>All-in-one platform to manage drivers, bookings, and customers efficiently.</p>
+</section>
+
+<section class="section">
+  <h2>Our Features</h2>
+  <div class="features">
+    <div class="box">
+      <h3>Live Tracking</h3>
+      <p>Track drivers and rides in real-time with GPS integration.</p>
+    </div>
+    <div class="box">
+      <h3>Easy Booking</h3>
+      <p>Customers can book rides instantly with a smooth interface.</p>
+    </div>
+    <div class="box">
+      <h3>Driver Management</h3>
+      <p>Manage drivers, documents, and performance easily.</p>
+    </div>
+    <div class="box">
+      <h3>Payment System</h3>
+      <p>Secure and flexible payment options for customers.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Why Choose Us?</h2>
+  <p>We provide scalable, reliable, and modern taxi dispatch solutions for startups and enterprises.</p>
+</section>
+
+<section class="section">
+  <h2>Contact Us</h2>
+  <p>Email: support@yellowsoft.com</p>
+  <p>Phone: +123 456 7890</p>
+</section>
+
+<div class="footer">
+  <p>© 2026 Taxi Dispatch Software | Yellowsoft</p>
+</div>
+
+</body>
+</html>`;
+
+    return new Response(html, {
+      headers: { "content-type": "text/html;charset=UTF-8" },
+    });
+  }
+};
