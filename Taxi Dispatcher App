@@ -1,82 +1,411 @@
 export default {
-  async fetch(request) {
+  async scheduled(event, env, ctx) {
+    console.log(event.scheduledTime)
 
     const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Taxi Dispatch Software | Yelowsoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<title>Taxi Dispatch Software | Yelowsoft</title>
+    :root {
+      --gold:  #F5A700;
+      --dark:  #0f1a2e;
+      --navy:  #1a2d4f;
+      --card:  #162035;
+      --text:  #c8d4e8;
+      --white: #ffffff;
+      --radius: 12px;
+    }
 
-<style>
-  body { font-family: Arial, sans-serif; margin:0; line-height:1.6; }
-  nav { padding:20px; background:#1a2540; color:#fff; font-weight:bold; }
-  .hero { padding:60px 20px; background:#273c60; color:#fff; text-align:center; }
-  h1 { color:#F5A700; }
-  .btn { background:#F5A700; padding:10px 20px; color:#000; border-radius:6px; display:inline-block; margin:10px; }
-  .section { padding:40px 20px; }
-  .box { background:#f5f5f5; padding:15px; margin:10px 0; border-radius:8px; }
-</style>
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+    }
 
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(245,167,0,.15);
+    }
+    .nav-brand {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      color: var(--white);
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: #0f1a2e;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 10px 22px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .nav-cta:hover { opacity: .88; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 96px 24px 80px;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,167,0,.12) 0%, transparent 70%), var(--dark);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(245,167,0,.15);
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(245,167,0,.3);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: 18px;
+      color: var(--text);
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold);
+      color: #0f1a2e;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .btn-primary:hover { opacity: .9; transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 30px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* STATS BAR */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: var(--card);
+      border-top: 1px solid rgba(255,255,255,.07);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .stat-item {
+      flex: 1;
+      min-width: 160px;
+      text-align: center;
+      padding: 28px 20px;
+      border-right: 1px solid rgba(255,255,255,.07);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .stat-label { font-size: 13px; color: var(--text); margin-top: 4px; }
+
+    /* SECTIONS */
+    section { padding: 72px 24px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .section-sub { color: var(--text); font-size: 16px; margin-bottom: 44px; }
+
+    /* DASHBOARD */
+    .dashboard { background: var(--navy); }
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+    }
+    .dash-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform .2s, border-color .2s;
+    }
+    .dash-card:hover { transform: translateY(-3px); border-color: rgba(245,167,0,.35); }
+    .dash-icon { font-size: 28px; }
+    .dash-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .dash-key { font-size: 13px; color: var(--text); text-transform: uppercase; letter-spacing: .5px; }
+    .dash-delta { font-size: 13px; color: #4caf92; font-weight: 600; }
+
+    /* FEATURES */
+    .features { background: var(--dark); }
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .feat-card {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: transform .2s, border-color .2s;
+    }
+    .feat-card:hover { transform: translateY(-4px); border-color: rgba(245,167,0,.4); }
+    .feat-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(245,167,0,.12);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+    .feat-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .feat-card p { font-size: 14px; color: var(--text); }
+
+    /* TESTIMONIAL */
+    .testimonial { background: var(--navy); }
+    .testi-box {
+      background: linear-gradient(135deg, rgba(245,167,0,.1), rgba(245,167,0,.03));
+      border: 1px solid rgba(245,167,0,.25);
+      border-radius: 16px;
+      padding: 48px;
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .stars { font-size: 22px; margin-bottom: 20px; }
+    .testi-box blockquote {
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+    .testi-box cite { font-style: normal; font-size: 14px; color: var(--gold); font-weight: 600; }
+
+    /* CTA */
+    .cta-section { background: var(--dark); text-align: center; }
+    .cta-box {
+      background: var(--card);
+      border: 1px solid rgba(245,167,0,.2);
+      border-radius: 20px;
+      padding: 64px 32px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .cta-box h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .cta-box p { font-size: 16px; color: var(--text); margin-bottom: 32px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding: 24px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 13px;
+      color: rgba(200,212,232,.5);
+    }
+    .footer-brand { font-family: 'Syne', sans-serif; font-size: 16px; color: var(--white); }
+    .footer-brand span { color: var(--gold); }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .stats-bar { flex-direction: column; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); }
+      .testi-box { padding: 32px 20px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
-<nav>🚖 Yelowsoft</nav>
+  <nav>
+    <div class="nav-brand">🚖 Yelow<span>soft</span></div>
+    <button class="nav-cta" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Book Free Demo</button>
+  </nav>
 
-<div class="hero">
-  <h1>The Best Taxi Dispatcher App</h1>
-  <h2>Built to Scale Your Fleet</h2>
-  <p>Say goodbye to dispatch chaos. Yelowsoft's automated taxi dispatch solution gives you real-time trip management, intelligent driver allocation, and a powerful dashboard.</p>
-  <a class="btn">Book Free Demo</a>
-  <a class="btn">See How It Works</a>
-</div>
+  <div class="hero">
+    <div class="hero-badge">🏆 #1 Rated Taxi Dispatch Platform</div>
+    <h1>The <span>Best Taxi</span><br>Dispatcher App</h1>
+    <p>Automate dispatch, manage drivers, and scale your fleet faster than ever.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">🚀 Book Free Demo</button>
+      <button class="btn-secondary">Watch How It Works</button>
+    </div>
+  </div>
 
-<div class="section">
-  <h2>📊 Live Dashboard Stats</h2>
-  <div class="box">Active drivers: 142</div>
-  <div class="box">Trips today: 1,038</div>
-  <div class="box">Pending bookings: 23</div>
-  <div class="box">Revenue today: $4,720</div>
-</div>
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">10K+</div>
+      <div class="stat-label">Active Drivers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">500K</div>
+      <div class="stat-label">Trips Dispatched</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">90%</div>
+      <div class="stat-label">Dispatch Automated</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">98%</div>
+      <div class="stat-label">Uptime SLA</div>
+    </div>
+  </div>
 
-<div class="section">
-  <h2>🚀 Features</h2>
-  <div class="box">Dispatch scheduling tool</div>
-  <div class="box">Real-time dispatch management</div>
-  <div class="box">GPS tracking</div>
-  <div class="box">Automated taxi dispatch</div>
-  <div class="box">Transparent fare calculation</div>
-  <div class="box">Analytics & reporting</div>
-</div>
+  <section class="dashboard">
+    <div class="container">
+      <div class="section-title">📊 Live Dashboard</div>
+      <div class="section-sub">Real-time visibility across your entire fleet — in one place.</div>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <div class="dash-icon">🚗</div>
+          <div class="dash-val">142</div>
+          <div class="dash-key">Active Drivers</div>
+          <div class="dash-delta">↑ 12 since yesterday</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-icon">🗺️</div>
+          <div class="dash-val">1,038</div>
+          <div class="dash-key">Trips Today</div>
+          <div class="dash-delta">↑ 8% vs last week</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-icon">⏳</div>
+          <div class="dash-val">23</div>
+          <div class="dash-key">Pending Rides</div>
+          <div class="dash-delta">Avg wait: 2.4 min</div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-icon">💰</div>
+          <div class="dash-val">$4,720</div>
+          <div class="dash-key">Today's Revenue</div>
+          <div class="dash-delta">↑ 15% vs last week</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="section">
-  <h2>⚙️ How It Works</h2>
-  <div class="box">1. Log in to dispatcher panel</div>
-  <div class="box">2. Review dashboard</div>
-  <div class="box">3. Manage drivers & rides</div>
-  <div class="box">4. Monitor bookings</div>
-  <div class="box">5. Analyze & grow</div>
-</div>
+  <section class="features">
+    <div class="container">
+      <div class="section-title">🚀 Powerful Features</div>
+      <div class="section-sub">Everything you need to run a professional taxi operation.</div>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="feat-icon">🤖</div>
+          <h3>AI Auto Dispatch</h3>
+          <p>Automatically assign rides to the nearest available driver using intelligent routing algorithms.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">📍</div>
+          <h3>Live GPS Tracking</h3>
+          <p>Track every vehicle in real-time on a live map. Know exactly where your fleet is, always.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">💲</div>
+          <h3>Fare Calculation</h3>
+          <p>Dynamic fare calculation based on distance, time, and surge pricing rules you control.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon">📈</div>
+          <h3>Analytics Dashboard</h3>
+          <p>Deep insights on revenue, driver performance, and trip trends to help you grow smarter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="section">
-  <h2>📈 Benefits</h2>
-  <div class="box">60% boost in dispatch efficiency</div>
-  <div class="box">3x faster ride assignment</div>
-  <div class="box">40% fewer missed bookings</div>
-</div>
+  <section class="testimonial">
+    <div class="container">
+      <div class="testi-box">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <blockquote>"90% of our dispatch is now automated — set up in just one week!"</blockquote>
+        <cite>— Arturo Reveles, Fleet Manager</cite>
+      </div>
+    </div>
+  </section>
 
-<div class="section">
-  <h2>💬 Testimonial</h2>
-  <p>"Yelowsoft transformed our dispatch system completely. 90% automation achieved."</p>
-  <strong>— Arturo Reveles (Click To Go)</strong>
-</div>
+  <section class="cta-section" id="demo">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Ready to Grow Your Taxi Business?</h2>
+        <p>Join thousands of operators who automated their dispatch and scaled their fleet with Yelowsoft.</p>
+        <button class="btn-primary" style="font-size:16px;padding:16px 36px;">🚖 Book Your Free Demo</button>
+      </div>
+    </div>
+  </section>
 
-<div class="section" style="text-align:center;">
-  <h2>🚖 Ready to Automate?</h2>
-  <p>Join 250+ taxi businesses using Yelowsoft.</p>
-  <a class="btn">Book Free Demo</a>
-</div>
+  <footer>
+    <div class="footer-brand">🚖 Yelow<span>soft</span></div>
+    <div>© 2025 Yelowsoft. All rights reserved.</div>
+  </footer>
 
 </body>
 </html>`;
